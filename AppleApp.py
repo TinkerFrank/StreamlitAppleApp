@@ -21,6 +21,7 @@ def main():
 
     # Create a VideoCapture object
     video_capture = cv2.VideoCapture(0)
+    
 
     # Create an empty placeholder for the image
     image_placeholder = st.empty()
@@ -30,7 +31,13 @@ def main():
 
     # Continuously read frames from the webcam
     while True:
-        _, frame = video_capture.read()
+        # Read a frame from the webcam
+        ret, frame = video_capture.read()
+
+        # Check if the frame was successfully read
+        if not ret:
+            st.error("Failed to read a frame from the camera.")
+            break
 
         # Convert the OpenCV BGR image to RGB
         rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
